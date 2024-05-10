@@ -29,6 +29,8 @@ const store = configureStore({
     isLogedIn: false,
     user: persistedStore,
     allEmails: [],
+    loading: false,
+    error: false
   },
 })
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const Home: React.FC = ()=> {
     return (
-        <div></div>
+        <div style={{padding: '80px'}}>Home</div>
     )
 }
 

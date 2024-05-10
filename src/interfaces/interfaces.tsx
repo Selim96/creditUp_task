@@ -18,4 +18,6 @@ export interface IState {
     isLogedIn: boolean,
     user: IUser,
     allEmails: IEmail[],
+    loading: boolean,
+    error: any
 };
