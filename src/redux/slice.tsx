@@ -23,7 +23,9 @@ const todoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    
+    logout: (state) => {
+      state = initialState;
+    }
     
   },
   extraReducers: (builder) => {

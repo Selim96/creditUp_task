@@ -14,6 +14,12 @@
     background-color: var(--header-color);
     box-shadow: 0 4px 7px var(--header-shadow);
     box-sizing: border-box;
+
+    & .title {
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--logo-color)
+    }
 }
 
 @import '../../stylesheet/mixin';
