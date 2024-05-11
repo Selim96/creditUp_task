@@ -16,7 +16,6 @@ const initialState: IState = {
   allEmails: [],
   loading: false,
   error: false
-  
 }
 
 const todoSlice = createSlice({
@@ -24,7 +23,14 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state = initialState;
+      state.isLogedIn = false;
+      state.user = {
+        id: -1,
+        username: '',
+        email: '',
+        password: ''
+      }
+      state.allEmails = [];
     }
     
   },
@@ -36,7 +42,8 @@ const todoSlice = createSlice({
     builder.addCase(api.register.fulfilled, (state, {payload}) => {
       state.loading = false;
       state.error = false;
-      console.log(payload)
+      state.isLogedIn = true;
+      state.user= payload;
     });
     builder.addCase(api.register.rejected, (state, {payload}) => {
       state.loading = false;
@@ -51,20 +58,51 @@ const todoSlice = createSlice({
     builder.addCase(api.login.fulfilled, (state, {payload}) => {
       state.loading = false;
       state.error = false;
-      console.log(payload)
       state.isLogedIn = true;
       state.user = payload;
     });
     builder.addCase(api.login.rejected, (state, {payload}) => {
       state.loading = false;
       state.error = payload;
+      if(payload === 401) {
+        toast.error("Wrong credantials!")
+      } else {
+        toast.error("Error")
+      }
+    });
+    builder.addCase(api.refresh.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(api.refresh.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      state.error = false;
+      state.isLogedIn = true;
+      
+    });
+    builder.addCase(api.refresh.rejected, (state, {payload}) => {
+      state.loading = false;
+      state.error = payload;
+    });
+
+    builder.addCase(api.getEmails.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(api.getEmails.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      state.error = false;
       console.log(payload)
-      toast.error("Error")
+      
+    });
+    builder.addCase(api.getEmails.rejected, (state, {payload}) => {
+      state.loading = false;
+      state.error = payload;
     });
   }
 })
 
 const reducer = todoSlice.reducer
 
-export const {  } = todoSlice.actions
+export const { logout, } = todoSlice.actions
 export default reducer

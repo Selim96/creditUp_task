@@ -1,15 +1,21 @@
 import React from "react";
 import s from './Usermenu.module.scss'
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import allSelectors from "../../redux/selectors";
+import { logout } from "../../redux/slice";
 
 const Usermenu: React.FC = () => {
-    const userData = useAppSelector(allSelectors.getUser)
+    const dispatch = useAppDispatch();
+    const userData = useAppSelector(allSelectors.getUser);
+
+    const onClickLogout = () => {
+        dispatch(logout())
+    }
     return (
         <div className={s.menu}>
             <div className={s.user_icon}>{userData.username.toUpperCase()[0]}</div>
             <p className={s.name}>{userData.username}</p>
-            <button type="button" className={s.logout}>Logout</button>
+            <button type="button" className={s.logout} onClick={onClickLogout}>Logout</button>
         </div>
     )
 }

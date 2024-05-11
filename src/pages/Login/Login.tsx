@@ -40,7 +40,7 @@ const Login: React.FC = () => {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="login" value={login} onChange={handlChange}/>
-                <input type="text" name="password" value={password} onChange={handlChange}/>
+                <input type="password" name="password" value={password} onChange={handlChange}/>
                 <button type="submit" disabled={!disabled}>Login</button>
             </form>
             <p>If you have not account <Link to={"/signUp"}>Sign Up</Link></p>
