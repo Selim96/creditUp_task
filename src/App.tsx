@@ -18,9 +18,10 @@ const api = new EmailsApi()
 
 function App() {
   const dispatch = useAppDispatch();
-  const {username, password} = useAppSelector(allSelectors.getUser)
+  const userData = useAppSelector(allSelectors.getUser)
   useEffect(() => {
-    dispatch(api.refresh({username, password}));
+    if(userData)
+    dispatch(api.refresh({username: userData.username, password: userData.password}));
   }, [dispatch]);
   return (
     <div className="App">
