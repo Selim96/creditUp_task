@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { IState } from "../interfaces/interfaces";
+
+
 
 interface IUserData {
     username: string,

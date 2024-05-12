@@ -20,8 +20,7 @@ function App() {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(allSelectors.getUser)
   useEffect(() => {
-    if(userData)
-    dispatch(api.refresh({username: userData.username, password: userData.password}));
+    if(userData) {dispatch(api.refresh({username: userData.username, password: userData.password}));}
   }, [dispatch]);
   return (
     <div className="App">
