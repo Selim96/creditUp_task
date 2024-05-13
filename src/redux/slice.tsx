@@ -114,7 +114,7 @@ const emailsSlice = createSlice({
       state.error = false;
       console.log(payload)
       state.sendedData = payload;
-      toast.done("Email is sended!")
+      toast.success("Email is sended!")
     });
     builder.addCase(api.sendEmails.rejected, (state, {payload}) => {
       state.loading = false;
