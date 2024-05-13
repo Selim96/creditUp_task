@@ -43,6 +43,8 @@ export const authority = {
 export class EmailsApi {
     private emails = 'emails/';
     private users = 'users/';
+    private limit = 10;
+    private offset = 0;
 
     register = createAsyncThunk<IResults, IUserData, {rejectValue: any}>(
         "user/signup",
@@ -92,12 +94,12 @@ export class EmailsApi {
         }
     )
 
-    getEmails = createAsyncThunk<IResponse, undefined, {rejectValue: any}>(
+    getEmails = createAsyncThunk<IResponse, number, {rejectValue: any}>(
         "emails/all",
-        async (_, { rejectWithValue}) => {
+        async (offset, { rejectWithValue}) => {
             
             try {
-                const { data } = await axios.get(`${this.emails}`);
+                const { data } = await axios.get(`${this.emails}?limit=${this.limit}&offset=${offset}`);
                 return data;
             } catch (error: any) {
                 console.log(error)
@@ -119,4 +121,14 @@ export class EmailsApi {
             } 
         }
     )
+
+    pageLimit() {
+        return this.limit;
+    }
+    pageOffset() {
+        return this.offset;
+    }
+    changeOffset(num: number) {
+        this.offset = num;
+    }
 }

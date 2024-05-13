@@ -89,7 +89,7 @@ const Modal = (): React.ReactPortal | null => {
             Message
           </label>
           <input type="text" id='message' name="message" value={inputText} onChange={changeInputs} required/>
-          <button type="submit">Send</button>
+          <button type="submit" className={s.button}>Send</button>
         </form>
       </div>
     </div>,

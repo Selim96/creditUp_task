@@ -23,6 +23,7 @@ export interface ISendData {
 export interface IState {
     isLogedIn: boolean,
     user: IUser,
+    emailCount:number,
     allEmails: IEmail[],
     loading: boolean,
     error: any,

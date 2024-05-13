@@ -19,3 +19,49 @@ th {
 td {
     text-align: center;
 }
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+.next,
+.prev,
+.page{
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #EEE;
+    background: #F5F5F5;
+    cursor: pointer;
+    color: #404B52;
+    &.active{
+        border: 1px solid #5932EA;
+        background: #5932EA;
+        color: #fff;
+    }
+    a{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.active__check{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    padding-right: 15px;
+}
+.itemsPerPage{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+}

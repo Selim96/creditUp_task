@@ -13,6 +13,7 @@ const initialState: IState = {
     email: '',
     password: ''
   },
+  emailCount: 0,
   allEmails: [],
   loading: false,
   error: false,
@@ -97,7 +98,8 @@ const emailsSlice = createSlice({
     builder.addCase(api.getEmails.fulfilled, (state, {payload}) => {
       state.loading = false;
       state.error = false;
-      console.log(payload)
+      console.log(payload);
+      state.emailCount = payload.count;
       state.allEmails = payload.results
     });
     builder.addCase(api.getEmails.rejected, (state, {payload}) => {
