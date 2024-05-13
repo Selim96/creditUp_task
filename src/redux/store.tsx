@@ -31,7 +31,8 @@ const store = configureStore({
     allEmails: [],
     loading: false,
     error: false,
-    isModalOpen: false
+    isModalOpen: false,
+    sendedData: null
   },
 })
 

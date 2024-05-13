@@ -17,10 +17,10 @@ const Home: React.FC = ()=> {
     return (
         <div style={{padding: '80px'}}>
             <div className={s.user_data}>
-                <p>User Name: <span>{username}</span></p>
-                <p>User Email: <span>{email}</span></p>
+                <p className={s.signas}>User Name: <span>{username}</span></p>
+                <p className={s.signas}>User Email: <span>{email}</span></p>
             </div>
-            <button type="button" onClick={openModal}>Send Email</button>
+            <button type="button" className={s.sendBtn} onClick={openModal}>Send Email</button>
 
             <ListOfEmails/>
             {isModalOpen && <Modal/>}

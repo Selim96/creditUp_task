@@ -6,6 +6,7 @@ const getUser = (state: IState) => state.user;
 const getLoading = (state: IState) => state.loading;
 const getError = (state: IState) => state.error;
 const getIsModalOpen = (state: IState) => state.isModalOpen;
+const getSendedData = (state:IState) => state.sendedData;
 
 const allSelectors = {
     getLogged,
@@ -13,7 +14,8 @@ const allSelectors = {
     getUser,
     getLoading,
     getError,
-    getIsModalOpen
+    getIsModalOpen,
+    getSendedData
 }
 
 export default allSelectors

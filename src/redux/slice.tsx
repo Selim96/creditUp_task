@@ -16,7 +16,8 @@ const initialState: IState = {
   allEmails: [],
   loading: false,
   error: false,
-  isModalOpen: false
+  isModalOpen: false,
+  sendedData: null
 }
 
 const emailsSlice = createSlice({
@@ -104,7 +105,7 @@ const emailsSlice = createSlice({
       state.error = payload;
     });
 
-    builder.addCase(api.sendEmails.pending, (state, {payload}) => {
+    builder.addCase(api.sendEmails.pending, (state) => {
       state.loading = true;
       state.error = false;
     });
@@ -112,6 +113,7 @@ const emailsSlice = createSlice({
       state.loading = false;
       state.error = false;
       console.log(payload)
+      state.sendedData = payload;
       toast.done("Email is sended!")
     });
     builder.addCase(api.sendEmails.rejected, (state, {payload}) => {

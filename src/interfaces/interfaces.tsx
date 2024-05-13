@@ -27,4 +27,5 @@ export interface IState {
     loading: boolean,
     error: any,
     isModalOpen: boolean,
+    sendedData: null | {}
 };

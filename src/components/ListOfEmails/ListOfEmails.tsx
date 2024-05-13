@@ -7,20 +7,21 @@ import allSelectors from "../../redux/selectors";
 
 
 const ListOfEmails: React.FC = () => {
-
     const api = new EmailsApi();
     const dispatch = useAppDispatch();
     const allEmails = useAppSelector(allSelectors.getAllEmails)
-    // const 
+    const sendedData = useAppSelector(allSelectors.getSendedData)
+
     useEffect(()=> {
         dispatch(api.getEmails())
-    }, [dispatch])
+    }, [dispatch, sendedData])
+
     return (
-        <div>
+        <div className={s.main}>
             <h3 className={s.title}>List Of Your Emails</h3>
-            <table>
-                <thead>
-                    <tr>
+            <table >
+                <thead >
+                    <tr className={s.headRow}>
                         <th>Email ID</th>
                         <th>Recipient</th>
                         <th>Subject</th>

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { toggleModal } from "../../redux/slice";
 import allSelectors from "../../redux/selectors";
 import { EmailsApi } from "../../services/api";
+import closeIcon from '../../images/clear.png';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -59,7 +60,7 @@ const Modal = (): React.ReactPortal | null => {
     setInputEmail('')
     setInputSubject('')
     setInputText('')
-    
+    dispatch(toggleModal(false))
   }
 
   useEffect(() => {
@@ -72,8 +73,9 @@ const Modal = (): React.ReactPortal | null => {
   if(modalRoot) {return createPortal(
     <div className={s.overlay} onClick={closeByBackdropClick}>
       <div className={s.modal}>
-        <h3>Send message form</h3>
-        <p>Sender email: <span>{email}</span></p>
+        <img src={closeIcon} alt="close" className={s.closeImg} onClick={closeByBackdropClick}/>
+        <h3 className={s.title}>Send message form</h3>
+        <p className={s.sender}>Sender email: <span>{email}</span></p>
         <form className={s.modal_form} onSubmit={submitForm}>
           <label htmlFor="recipient">
             Recipient
