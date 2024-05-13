@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { EmailsApi } from "../../services/api";
 import { useAppDispatch } from "../../redux/hooks";
+import s from "./Login.module.scss"
 
 const api = new EmailsApi()
 
@@ -37,13 +38,15 @@ const Login: React.FC = () => {
 
     return (
         <div style={{padding: '80px'}}>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="login" value={login} onChange={handlChange}/>
-                <input type="password" name="password" value={password} onChange={handlChange}/>
-                <button type="submit" disabled={!disabled}>Login</button>
+            <h2 className={s.title}>Login</h2>
+            <form onSubmit={handleSubmit} className={s.form}>
+                <label htmlFor="login">Login</label>
+                <input type="text" name="login" id="login" value={login} onChange={handlChange} required/>
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" id="password" value={password} onChange={handlChange} required/>
+                <button type="submit" disabled={!disabled} style={!disabled ? {opacity: "0.5"}: {}} className={s.button}>Login</button> 
             </form>
-            <p>If you have not account <Link to={"/signUp"}>Sign Up</Link></p>
+            <p className={s.redirect}>If you have not account <Link to={"/signUp"}>Sign Up</Link></p>
         </div>
     )
 }
