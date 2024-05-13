@@ -15,13 +15,17 @@ const initialState: IState = {
   },
   allEmails: [],
   loading: false,
-  error: false
+  error: false,
+  isModalOpen: false
 }
 
-const todoSlice = createSlice({
-  name: "todos",
+const emailsSlice = createSlice({
+  name: "emails",
   initialState,
   reducers: {
+    toggleModal: (state, actions:PayloadAction<boolean>) =>{
+      state.isModalOpen = actions.payload;
+    },
     logout: (state) => {
       state.isLogedIn = false;
       state.user = {
@@ -93,16 +97,32 @@ const todoSlice = createSlice({
       state.loading = false;
       state.error = false;
       console.log(payload)
-      
+      state.allEmails = payload.results
     });
     builder.addCase(api.getEmails.rejected, (state, {payload}) => {
       state.loading = false;
       state.error = payload;
     });
+
+    builder.addCase(api.sendEmails.pending, (state, {payload}) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(api.sendEmails.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      state.error = false;
+      console.log(payload)
+      toast.done("Email is sended!")
+    });
+    builder.addCase(api.sendEmails.rejected, (state, {payload}) => {
+      state.loading = false;
+      state.error = payload;
+      toast.error("Something went wrong!")
+    });
   }
 })
 
-const reducer = todoSlice.reducer
+const reducer = emailsSlice.reducer
 
-export const { logout, } = todoSlice.actions
+export const { logout, toggleModal, } = emailsSlice.actions
 export default reducer

@@ -5,13 +5,15 @@ const getAllEmails = (state: IState) => state.allEmails;
 const getUser = (state: IState) => state.user;
 const getLoading = (state: IState) => state.loading;
 const getError = (state: IState) => state.error;
+const getIsModalOpen = (state: IState) => state.isModalOpen;
 
 const allSelectors = {
     getLogged,
     getAllEmails,
     getUser,
     getLoading,
-    getError
+    getError,
+    getIsModalOpen
 }
 
 export default allSelectors

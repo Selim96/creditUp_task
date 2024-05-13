@@ -4,6 +4,7 @@ import allSelectors from "../../redux/selectors";
 
 const PrivateRoute = ({ children }) => {
   const isAuth = useAppSelector(allSelectors.getLogged);
+  // const isAuth = true
   return isAuth ? children : <Navigate to="/login" />;
 };
 

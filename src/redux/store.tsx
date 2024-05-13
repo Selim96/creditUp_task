@@ -30,7 +30,8 @@ const store = configureStore({
     user: persistedStore,
     allEmails: [],
     loading: false,
-    error: false
+    error: false,
+    isModalOpen: false
   },
 })
 

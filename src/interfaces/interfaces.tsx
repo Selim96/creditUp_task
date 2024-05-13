@@ -13,11 +13,18 @@ export interface IUser {
     password: string
 }
 
+export interface ISendData {
+    sender: number,
+    recipient: string,
+    subject: string,
+    message: string
+}
 
 export interface IState {
     isLogedIn: boolean,
     user: IUser,
     allEmails: IEmail[],
     loading: boolean,
-    error: any
+    error: any,
+    isModalOpen: boolean,
 };

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ISendData, IEmail } from "../interfaces/interfaces";
 
 
 
@@ -14,6 +15,13 @@ interface IResults {
     username: string,
     email: string,
     password: string
+}
+
+interface IResponse {
+    count: number,
+    next: null | string,
+    previous: null | string,
+    results: []
 }
 
 axios.defaults.baseURL = "http://68.183.74.14:4005/api/";
@@ -33,7 +41,7 @@ export const authority = {
   };
 
 export class EmailsApi {
-    private emails = 'emails';
+    private emails = 'emails/';
     private users = 'users/';
 
     register = createAsyncThunk<IResults, IUserData, {rejectValue: any}>(
@@ -84,12 +92,26 @@ export class EmailsApi {
         }
     )
 
-    getEmails = createAsyncThunk<IResults, undefined, {rejectValue: any}>(
+    getEmails = createAsyncThunk<IResponse, undefined, {rejectValue: any}>(
         "emails/all",
         async (_, { rejectWithValue}) => {
             
             try {
                 const { data } = await axios.get(`${this.emails}`);
+                return data;
+            } catch (error: any) {
+                console.log(error)
+                return rejectWithValue(error.status);
+            } 
+        }
+    )
+
+    sendEmails = createAsyncThunk<IEmail, ISendData, {rejectValue: any}>(
+        "emails/send",
+        async (sendData, { rejectWithValue}) => {
+            
+            try {
+                const { data } = await axios.post(`${this.emails}`, sendData);
                 return data;
             } catch (error: any) {
                 console.log(error)

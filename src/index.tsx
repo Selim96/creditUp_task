@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import './stylesheet/shared.scss'
 
+
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
