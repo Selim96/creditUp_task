@@ -6,6 +6,8 @@ import { toggleModal } from "../../redux/slice";
 import allSelectors from "../../redux/selectors";
 import { EmailsApi } from "../../services/api";
 import closeIcon from '../../images/clear.png';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -13,8 +15,8 @@ const api = new EmailsApi()
 
 const Modal = (): React.ReactPortal | null => {
   const [inputEmail, setInputEmail] = useState('');
-  const [inputSubject, setInputSubject] = useState('')
-  const [inputText, setInputText] = useState('')
+  const [inputSubject, setInputSubject] = useState('');
+  const [value, setValue] = useState('');
 
   const dispatch = useAppDispatch()
   const {id, username, email} = useAppSelector(allSelectors.getUser)
@@ -41,9 +43,6 @@ const Modal = (): React.ReactPortal | null => {
       case "subject" :
         setInputSubject(e.target.value)
         break;
-      case "message" :
-        setInputText(e.target.value)
-        break;
       default: 
         return;
     }
@@ -55,11 +54,11 @@ const Modal = (): React.ReactPortal | null => {
       sender: id, 
       recipient: inputEmail, 
       subject:inputSubject, 
-      message: inputText
+      message: value
     }));
     setInputEmail('')
     setInputSubject('')
-    setInputText('')
+    setValue('')
     dispatch(toggleModal(false))
   }
 
@@ -88,7 +87,7 @@ const Modal = (): React.ReactPortal | null => {
           <label htmlFor="message">
             Message
           </label>
-          <input type="text" id='message' name="message" value={inputText} onChange={changeInputs} required/>
+          <ReactQuill theme="snow" value={value} onChange={setValue} />
           <button type="submit" className={s.button}>Send</button>
         </form>
       </div>

@@ -5,10 +5,13 @@ import { EmailsApi } from "../../services/api";
 import allSelectors from "../../redux/selectors";
 import ReactPaginate from "react-paginate";
 
+
 const api = new EmailsApi();
 
 const ListOfEmails: React.FC = () => {
-    const [offset, setOffset] = useState(0)
+    const [offset, setOffset] = useState(0);
+    
+
     const dispatch = useAppDispatch();
     const allEmails = useAppSelector(allSelectors.getAllEmails)
     const count = useAppSelector(allSelectors.getCount)
@@ -62,6 +65,7 @@ const ListOfEmails: React.FC = () => {
                 nextClassName={s.next}
                 previousClassName={s.prev}
             />
+            
         </div>
     )
 }
