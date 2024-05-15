@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { EmailsApi } from './services/api';
 import allSelectors from './redux/selectors';
+import { Analytics } from '@vercel/analytics/react'
 
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(()=>import('./pages/Register'));
@@ -55,6 +56,7 @@ function App() {
         </Routes>
       </Suspense>
       <ToastContainer/>
+      <Analytics/>
     </div>
   );
 }
