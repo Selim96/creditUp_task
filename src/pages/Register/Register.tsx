@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { EmailsApi } from "../../services/api";
 import s from "./Register.module.scss"
+import allSelectors from "../../redux/selectors";
+import Loader from "../../components/Loader";
 
 const api = new EmailsApi()
 
@@ -12,6 +14,8 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState('');
 
     const dispatch = useAppDispatch()
+
+    const isLoading = useAppSelector(allSelectors.getLoading);
 
     const handlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.toString().trim();
@@ -40,7 +44,7 @@ const Register: React.FC = () => {
 
     const disabled = login && email && password;
 
-    return (
+    return (!isLoading ?
         <div style={{padding: '80px'}}>
             <h2 className={s.title}>Sing Up</h2>
             <form onSubmit={handleSubmit} className={s.form}>
@@ -53,7 +57,7 @@ const Register: React.FC = () => {
                 <button type="submit" style={!disabled ? {opacity: "0.5"}: {}} className={s.button} disabled={!disabled}>Sign Up</button>
             </form>
             <p className={s.redirect}>If you alredy have account <Link to={"/login"}>Login</Link></p>
-        </div>
+        </div> : <Loader/>
     )
 }
 

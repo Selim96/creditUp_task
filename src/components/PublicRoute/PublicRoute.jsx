@@ -4,6 +4,7 @@ import allSelectors from "../../redux/selectors";
 
 const PublicRoute = ({ children, restricted = false }) => {
   const isAuth = useAppSelector(allSelectors.getLogged);
+  
   return <>{isAuth && restricted ? <Navigate to="/" /> : children}</>;
 };
 
